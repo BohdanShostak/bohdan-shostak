@@ -16,7 +16,7 @@ public class Homework2Application {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(Config1.class);
 
-        System.out.println("___Order of creation beans: D-> B-> C_Other__");
+        System.out.println("___Order of creation beans: D-> B-> C_Other___");
         context.getBean(GeneralBean.class).printOrderedBeans();
 
         System.out.println("___List of all beans___");
