@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class Card {
+
     private long cardNumber;
     private String dueDate;
     private int cvv;

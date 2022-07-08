@@ -6,9 +6,10 @@ import lombok.Data;
 @Data
 @Builder
 public class Account {
+
     private long id;
     private double sum;
     private double creditLimit;
-    private  AccountStatus accountStatus;
+    private AccountStatus accountStatus;
     private int userId;
 }

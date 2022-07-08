@@ -8,6 +8,7 @@ import java.sql.Date;
 @Data
 @Builder
 public class Payment {
+
     private int id;
     private long recipientAccount;
     private long recipientCardNumber;
