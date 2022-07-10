@@ -50,5 +50,5 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteUser(email);
         log.info("User with email {} was deleted", email);
     }
-    
+
 }

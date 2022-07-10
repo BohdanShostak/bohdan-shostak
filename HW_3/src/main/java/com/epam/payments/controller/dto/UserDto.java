@@ -1,7 +1,7 @@
 package com.epam.payments.controller.dto;
 
-import com.epam.payments.service.model.Role;
-import com.epam.payments.service.model.UserStatus;
+import com.epam.payments.service.model.enums.Role;
+import com.epam.payments.service.model.enums.UserStatus;
 import lombok.Builder;
 import lombok.Data;
 

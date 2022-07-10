@@ -1,5 +1,6 @@
 package com.epam.payments.service.model;
 
+import com.epam.payments.service.model.enums.PaymentStatus;
 import lombok.Builder;
 import lombok.Data;
 

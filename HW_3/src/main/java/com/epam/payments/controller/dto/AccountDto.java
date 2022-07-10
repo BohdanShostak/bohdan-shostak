@@ -1,6 +1,6 @@
 package com.epam.payments.controller.dto;
 
-import com.epam.payments.service.model.AccountStatus;
+import com.epam.payments.service.model.enums.AccountStatus;
 import lombok.Builder;
 import lombok.Data;
 

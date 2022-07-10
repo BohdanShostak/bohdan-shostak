@@ -1,5 +1,6 @@
 package com.epam.payments.service.model;
 
+import com.epam.payments.service.model.enums.AccountStatus;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,4 +13,5 @@ public class Account {
     private double creditLimit;
     private AccountStatus accountStatus;
     private int userId;
+
 }

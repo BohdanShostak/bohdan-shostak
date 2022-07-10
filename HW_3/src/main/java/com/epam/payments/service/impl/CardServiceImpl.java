@@ -50,4 +50,5 @@ public class CardServiceImpl implements CardService {
         cardRepository.deleteCard(cardNumber);
         log.info("Card with cardNumber {} was deleted", cardNumber);
     }
+
 }

@@ -33,7 +33,7 @@ public class CardController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public CardDto createCard(CardDto cardDto) {
+    public CardDto createCard(@RequestBody CardDto cardDto) {
         log.info("createCard with cardNumber {}", cardDto.getCardNumber());
         return cardService.createCard(cardDto);
     }
