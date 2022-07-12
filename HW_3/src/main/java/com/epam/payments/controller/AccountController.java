@@ -1,10 +1,13 @@
 package com.epam.payments.controller;
 
 import com.epam.payments.controller.dto.AccountDto;
+import com.epam.payments.controller.dto.group.OnCreate;
+import com.epam.payments.controller.dto.group.OnUpdate;
 import com.epam.payments.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,14 +36,14 @@ public class AccountController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public AccountDto createAccount(@RequestBody AccountDto accountDto) {
+    public AccountDto createAccount(@RequestBody @Validated(OnCreate.class) AccountDto accountDto) {
         log.info("createAccount with id {}", accountDto.getId());
         return accountService.createAccount(accountDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
-    public AccountDto updateAccount(@PathVariable long id, @RequestBody AccountDto accountDto) {
+    public AccountDto updateAccount(@PathVariable long id, @RequestBody @Validated(OnUpdate.class) AccountDto accountDto) {
         log.info("updateAccount by id {}", id);
         return accountService.updateAccount(id, accountDto);
     }

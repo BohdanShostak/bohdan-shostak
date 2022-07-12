@@ -1,10 +1,13 @@
 package com.epam.payments.controller;
 
 import com.epam.payments.controller.dto.CardDto;
+import com.epam.payments.controller.dto.group.OnCreate;
+import com.epam.payments.controller.dto.group.OnUpdate;
 import com.epam.payments.service.CardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,14 +36,14 @@ public class CardController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public CardDto createCard(@RequestBody CardDto cardDto) {
+    public CardDto createCard(@RequestBody @Validated(OnCreate.class) CardDto cardDto) {
         log.info("createCard with cardNumber {}", cardDto.getCardNumber());
         return cardService.createCard(cardDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{cardNumber}")
-    public CardDto updateCard(@PathVariable long cardNumber, @RequestBody CardDto cardDto) {
+    public CardDto updateCard(@PathVariable long cardNumber, @RequestBody @Validated(OnUpdate.class) CardDto cardDto) {
         log.info("updateCard by cardNumber {}", cardNumber);
         return cardService.updateCard(cardNumber, cardDto);
     }

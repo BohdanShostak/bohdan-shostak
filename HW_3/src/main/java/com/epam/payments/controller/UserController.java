@@ -1,10 +1,13 @@
 package com.epam.payments.controller;
 
 import com.epam.payments.controller.dto.UserDto;
+import com.epam.payments.controller.dto.group.OnCreate;
+import com.epam.payments.controller.dto.group.OnUpdate;
 import com.epam.payments.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,14 +36,14 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public UserDto createUser(@RequestBody UserDto userDto) { // User or extended user???
+    public UserDto createUser(@RequestBody @Validated(OnCreate.class) UserDto userDto) { // User or extended user???
         log.info("createUser with email {}", userDto.getEmail());
         return userService.createUser(userDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{email}")
-    public UserDto updateUser(@PathVariable String email, @RequestBody UserDto userDto) { // User or extended user???
+    public UserDto updateUser(@PathVariable String email, @RequestBody @Validated(OnUpdate.class) UserDto userDto) { // User or extended user???
         log.info("updateUser by email {}", email);
         return userService.updateUser(email, userDto);
     }
