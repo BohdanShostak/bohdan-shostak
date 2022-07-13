@@ -18,7 +18,7 @@ import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PaymentDto {
 
-    //@JsonProperty(access = READ_ONLY)
+    @JsonProperty(access = READ_ONLY)
     private int id;
 
     @Positive(message = "'recipientAccount' must not be less than 0", groups = {OnCreate.class, OnUpdate.class})

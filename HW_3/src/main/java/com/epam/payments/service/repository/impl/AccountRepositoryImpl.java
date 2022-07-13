@@ -1,5 +1,6 @@
 package com.epam.payments.service.repository.impl;
 
+import com.epam.payments.exception.AccountNotFoundException;
 import com.epam.payments.service.model.Account;
 import com.epam.payments.service.repository.AccountRepository;
 import org.springframework.stereotype.Repository;
@@ -17,7 +18,7 @@ public class AccountRepositoryImpl implements AccountRepository {
         return accountList.stream()
                 .filter(account -> account.getId() == id)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Account is not found!"));
+                .orElseThrow(() -> new AccountNotFoundException(id));
     }
 
     @Override
@@ -27,18 +28,20 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     @Override
     public Account createAccount(Account account) {
+        account.setId(accountList.size() + 1);
         accountList.add(account);
         return account;
     }
 
     @Override
     public Account updateAccount(long id, Account account) {
-        boolean isDeleted = accountList.removeIf(a -> a.getId() == id);
-        if (isDeleted) {
-            accountList.add(account);
-        } else {
-            throw new RuntimeException("Account is not found!");
-        }
+        Account oldAccount = accountList.stream()
+                .filter(a -> a.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new AccountNotFoundException(id));
+        accountList.remove(oldAccount);
+        account.setId(oldAccount.getId());
+        accountList.add(account);
         return account;
     }
 

@@ -1,5 +1,7 @@
 package com.epam.payments.service.repository.impl;
 
+import com.epam.payments.exception.EntityExistsException;
+import com.epam.payments.exception.UserNotFoundException;
 import com.epam.payments.service.model.User;
 import com.epam.payments.service.repository.UserRepository;
 import org.springframework.stereotype.Repository;
@@ -18,7 +20,7 @@ public class UserRepositoryImpl implements UserRepository {
                 .filter(user -> user.getEmail()
                         .equals(email))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("User is not found!"));
+                .orElseThrow(() -> new UserNotFoundException(email));
     }
 
     @Override
@@ -28,18 +30,24 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User createUser(User user) {
+        if (userList.stream().anyMatch((u)->u.getEmail().equals(user.getEmail()))) {
+            throw new EntityExistsException("User with this email already exists");
+        }
+        user.setId(userList.size() + 1);
         userList.add(user);
         return user;
     }
 
     @Override
     public User updateUser(String email, User user) {
-        boolean isDeleted = userList.removeIf(u -> u.getEmail().equals(email));
-        if (isDeleted) {
-            userList.add(user);
-        } else {
-            throw new RuntimeException("User is not found!");
-        }
+        User oldUser = userList.stream()
+                .filter(u -> u.getEmail()
+                        .equals(email))
+                .findFirst()
+                .orElseThrow(() -> new UserNotFoundException(email));
+        userList.remove(oldUser);
+        user.setId(oldUser.getId());
+        userList.add(user);
         return user;
     }
 

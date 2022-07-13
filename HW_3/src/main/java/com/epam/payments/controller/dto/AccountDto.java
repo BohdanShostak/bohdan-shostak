@@ -19,7 +19,7 @@ import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AccountDto {
 
-    //@JsonProperty(access = READ_ONLY)
+    @JsonProperty(access = READ_ONLY)
     private long id;
 
     @NotNull(message = "'sum' shouldn't be empty", groups = {OnCreate.class, OnUpdate.class})

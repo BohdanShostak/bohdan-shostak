@@ -20,7 +20,7 @@ import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto {
 
-    //@JsonProperty(access = READ_ONLY)
+    @JsonProperty(access = READ_ONLY)
     private int id;
 
     @NotBlank(message = "'login' shouldn't be empty", groups = {OnCreate.class, OnUpdate.class})

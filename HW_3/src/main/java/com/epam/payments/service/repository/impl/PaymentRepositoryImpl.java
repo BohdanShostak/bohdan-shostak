@@ -1,5 +1,6 @@
 package com.epam.payments.service.repository.impl;
 
+import com.epam.payments.exception.PaymentNotFoundException;
 import com.epam.payments.service.model.Payment;
 import com.epam.payments.service.repository.PaymentRepository;
 import org.springframework.stereotype.Repository;
@@ -17,7 +18,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
         return paymentList.stream()
                 .filter(payment -> payment.getId() == id)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Payment is not found!"));
+                .orElseThrow(() -> new PaymentNotFoundException(id));
     }
 
     @Override
@@ -27,18 +28,20 @@ public class PaymentRepositoryImpl implements PaymentRepository {
 
     @Override
     public Payment createPayment(Payment payment) {
+        payment.setId(paymentList.size() + 1);
         paymentList.add(payment);
         return payment;
     }
 
     @Override
     public Payment updatePayment(int id, Payment payment) {
-        boolean isDeleted = paymentList.removeIf(p -> p.getId() == id);
-        if (isDeleted) {
-            paymentList.add(payment);
-        } else {
-            throw new RuntimeException("Payment is not found!");
-        }
+        Payment oldPayment = paymentList.stream()
+                .filter(p -> p.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new PaymentNotFoundException(id));
+        paymentList.remove(oldPayment);
+        payment.setId(oldPayment.getId());
+        paymentList.add(payment);
         return payment;
     }
 

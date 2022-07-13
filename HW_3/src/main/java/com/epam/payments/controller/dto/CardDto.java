@@ -20,7 +20,7 @@ public class CardDto {
     private long cardNumber;
 
     @NotBlank(message = "'dueDate' shouldn't be empty", groups = {OnCreate.class, OnUpdate.class})
-    @Pattern(regexp = "([0-9]{2}/[0-9]{2})")
+    @Pattern(regexp = "[0-9]{2}/[0-9]{2}", message = "'dueDate' should be correct", groups = {OnCreate.class, OnUpdate.class})
     private String dueDate;
 
     @NotNull(message = "'cvv' shouldn't be empty", groups = {OnCreate.class, OnUpdate.class})

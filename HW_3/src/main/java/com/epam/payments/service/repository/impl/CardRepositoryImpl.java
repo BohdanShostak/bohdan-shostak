@@ -1,5 +1,7 @@
 package com.epam.payments.service.repository.impl;
 
+import com.epam.payments.exception.CardNotFoundException;
+import com.epam.payments.exception.EntityExistsException;
 import com.epam.payments.service.model.Card;
 import com.epam.payments.service.repository.CardRepository;
 import org.springframework.stereotype.Repository;
@@ -17,7 +19,7 @@ public class CardRepositoryImpl implements CardRepository {
         return cardList.stream()
                 .filter(card -> card.getCardNumber() == cardNumber)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Card is not found!"));
+                .orElseThrow(() -> new CardNotFoundException(cardNumber));
     }
 
     @Override
@@ -27,18 +29,22 @@ public class CardRepositoryImpl implements CardRepository {
 
     @Override
     public Card createCard(Card card) {
+        if (cardList.stream().anyMatch((c)->c.getCardNumber() == (card.getCardNumber()))) {
+            throw new EntityExistsException("Card with this cardNumber already exists");
+        }
         cardList.add(card);
         return card;
     }
 
     @Override
     public Card updateCard(long cardNumber, Card card) {
-        boolean isDeleted = cardList.removeIf(c -> c.getCardNumber() == cardNumber);
-        if (isDeleted) {
-            cardList.add(card);
-        } else {
-            throw new RuntimeException("Card is not found!");
-        }
+        Card oldCard = cardList.stream()
+                .filter(c -> c.getCardNumber() == cardNumber)
+                .findFirst()
+                .orElseThrow(() -> new CardNotFoundException(cardNumber));
+        cardList.remove(oldCard);
+        card.setCardNumber(oldCard.getCardNumber());
+        cardList.add(card);
         return card;
     }
 
