@@ -8,6 +8,7 @@ public class BeanB implements Rating {
 
     @Value("${beanB.name}")
     private String name;
+
     @Value("${beanB.value}")
     private int value;
 

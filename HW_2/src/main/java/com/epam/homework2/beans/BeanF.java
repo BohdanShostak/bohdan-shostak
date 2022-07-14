@@ -3,6 +3,7 @@ package com.epam.homework2.beans;
 public class BeanF implements Rating {
 
     private String name;
+
     private int value;
 
     @Override

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.InitializingBean;
 public class BeanA implements InitializingBean, DisposableBean, Rating {
 
     private String name;
+
     private int value;
 
     @Override
@@ -34,12 +35,12 @@ public class BeanA implements InitializingBean, DisposableBean, Rating {
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         System.out.println("(BeanA)Inside InitializingBean.afterPropertiesSet()");
     }
 
     @Override
-    public void destroy() throws Exception {
+    public void destroy() {
         System.out.println("(BeanA)Inside DisposableBean.destroy()");
     }
 

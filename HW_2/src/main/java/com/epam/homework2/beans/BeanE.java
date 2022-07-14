@@ -6,6 +6,7 @@ import javax.annotation.PreDestroy;
 public class BeanE implements Rating {
 
     private String name;
+
     private int value;
 
     @Override
