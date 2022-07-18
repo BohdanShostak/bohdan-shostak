@@ -1,7 +1,8 @@
 package com.epam.payments.controller.dto;
 
-import com.epam.payments.controller.dto.group.OnCreate;
-import com.epam.payments.controller.dto.group.OnUpdate;
+import com.epam.payments.controller.dto.validation.Phone;
+import com.epam.payments.controller.dto.validation.group.OnCreate;
+import com.epam.payments.controller.dto.validation.group.OnUpdate;
 import com.epam.payments.service.model.enums.Role;
 import com.epam.payments.service.model.enums.UserStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -36,6 +37,7 @@ public class UserDto {
     @NotBlank(message = "'email' shouldn't be empty", groups = {OnCreate.class, OnUpdate.class})
     private String email;
 
+    @Phone(groups = {OnCreate.class, OnUpdate.class})
     private String tel;
 
     @NotNull(message = "'userStatus' shouldn't be empty", groups = {OnCreate.class, OnUpdate.class})

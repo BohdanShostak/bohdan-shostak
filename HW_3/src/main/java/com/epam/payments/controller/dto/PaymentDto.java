@@ -1,7 +1,7 @@
 package com.epam.payments.controller.dto;
 
-import com.epam.payments.controller.dto.group.OnCreate;
-import com.epam.payments.controller.dto.group.OnUpdate;
+import com.epam.payments.controller.dto.validation.group.OnCreate;
+import com.epam.payments.controller.dto.validation.group.OnUpdate;
 import com.epam.payments.service.model.enums.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

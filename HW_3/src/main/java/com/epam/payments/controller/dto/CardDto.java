@@ -1,15 +1,12 @@
 package com.epam.payments.controller.dto;
 
-import com.epam.payments.controller.dto.group.OnCreate;
-import com.epam.payments.controller.dto.group.OnUpdate;
+import com.epam.payments.controller.dto.validation.group.OnCreate;
+import com.epam.payments.controller.dto.validation.group.OnUpdate;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.*;
-
-import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 
 @Data
 @Builder

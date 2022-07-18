@@ -1,8 +1,8 @@
 package com.epam.payments.api;
 
 import com.epam.payments.controller.dto.UserDto;
-import com.epam.payments.controller.dto.group.OnCreate;
-import com.epam.payments.controller.dto.group.OnUpdate;
+import com.epam.payments.controller.dto.validation.group.OnCreate;
+import com.epam.payments.controller.dto.validation.group.OnUpdate;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -33,7 +33,7 @@ public interface UserApi {
     UserDto getUserByEmail(@PathVariable String email);
 
     @ApiOperation("Create user")
-    @ResponseStatus(HttpStatus.CREATED)
+      @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     UserDto createUser(@RequestBody @Validated(OnCreate.class) UserDto userDto);
 
