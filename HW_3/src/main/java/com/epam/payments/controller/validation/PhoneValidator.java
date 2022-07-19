@@ -1,4 +1,4 @@
-package com.epam.payments.controller.dto.validation;
+package com.epam.payments.controller.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
